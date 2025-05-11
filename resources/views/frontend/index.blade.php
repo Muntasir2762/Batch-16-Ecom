@@ -82,7 +82,7 @@
 					<h1 class="title">
 						Hot Products
 					</h1>
-					<a href="{{url('/type-products')}}" class="product-view-all-btn">
+					<a href="{{url('/type-products/hot')}}" class="product-view-all-btn">
 						View All
 					</a>
 				</div>
@@ -105,7 +105,7 @@
 						</div>
 						<div class="product__item-info-outer">
 							<a href="{{url('/product-details')}}" class="product__item-name">
-								Test Product
+								Test Product1
 							</a>
 							<div class="product__item-price-outer">
 								<div class="product__item-discount-price">
@@ -135,7 +135,7 @@
 						</div>
 						<div class="product__item-info-outer">
 							<a href="#" class="product__item-name">
-								Test Product
+								Test Product2
 							</a>
 							<div class="product__item-price-outer">
 								<div class="product__item-discount-price">
@@ -165,7 +165,7 @@
 						</div>
 						<div class="product__item-info-outer">
 							<a href="#" class="product__item-name">
-								Test Product
+								Test Product3
 							</a>
 							<div class="product__item-price-outer">
 								<div class="product__item-discount-price">
@@ -195,7 +195,7 @@
 						</div>
 						<div class="product__item-info-outer">
 							<a href="#" class="product__item-name">
-								Test Product
+								Test Product4
 							</a>
 							<div class="product__item-price-outer">
 								<div class="product__item-discount-price">
@@ -225,7 +225,7 @@
 						</div>
 						<div class="product__item-info-outer">
 							<a href="#" class="product__item-name">
-								Test Product
+								Test Product5
 							</a>
 							<div class="product__item-price-outer">
 								<div class="product__item-discount-price">
@@ -255,7 +255,7 @@
 						</div>
 						<div class="product__item-info-outer">
 							<a href="#" class="product__item-name">
-								Test Product
+								Test Product6
 							</a>
 							<div class="product__item-price-outer">
 								<div class="product__item-discount-price">
@@ -338,7 +338,7 @@
 					<h1 class="title">
 						New Arrival
 					</h1>
-					<a href="{{url('/type-products')}}" class="product-view-all-btn">
+					<a href="{{url('/type-products/new')}}" class="product-view-all-btn">
 						View All
 					</a>
 				</div>
@@ -444,7 +444,7 @@
 					<h1 class="title">
 						Regular Products
 					</h1>
-					<a href="{{url('/type-products')}}" class="product-view-all-btn">
+					<a href="{{url('/type-products/regular')}}" class="product-view-all-btn">
 						View All
 					</a>
 				</div>
@@ -550,7 +550,7 @@
 					<h1 class="title">
 						Discount Products
 					</h1>
-					<a href="{{url('/type-products')}}" class="product-view-all-btn">
+					<a href="{{url('/type-products/discount')}}" class="product-view-all-btn">
 						View All
 					</a>
 				</div>

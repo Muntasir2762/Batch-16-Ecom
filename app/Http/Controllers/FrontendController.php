@@ -24,4 +24,49 @@ class FrontendController extends Controller
     {
         return view('frontend.product-details');
     }
+
+    public function typeProducts ($type)
+    {
+        return view('frontend.type-products', compact('type'));
+    }
+
+    public function viewCart ()
+    {
+        return view('frontend.view-cart');
+    }
+
+    public function checkOut ()
+    {
+        return view('frontend.checkout');
+    }
+
+    public function privacyPolicy ()
+    {
+        return view('frontend.privacy-policy');
+    }
+
+    public function termsCondition ()
+    {
+        return view('frontend.terms-conditions');
+    }
+
+    public function refundPolicy ()
+    {
+        return view('frontend.refund-policy');
+    }
+
+    public function paymentPolicy ()
+    {
+        return view('frontend.payment-policy');
+    }
+
+    public function aboutUs ()
+    {
+        return view('frontend.about-us');
+    }
+
+    public function contactUs ()
+    {
+        return view('frontend.contact-us');
+    }
 }
