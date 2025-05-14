@@ -19,3 +19,6 @@ Route::get('/refund-policy', [FrontendController::class, 'refundPolicy']);
 Route::get('/payment-policy', [FrontendController::class, 'paymentPolicy']);
 Route::get('/about-us', [FrontendController::class, 'aboutUs']);
 Route::get('/contact-us', [FrontendController::class, 'contactUs']);
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
