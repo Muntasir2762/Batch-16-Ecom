@@ -25,6 +25,7 @@ Route::get('/contact-us', [FrontendController::class, 'contactUs']);
 
 //Admin Auth Routes..
 Route::get('/admin/login', [AdminAuthController::class, 'loginForm']);
+Route::get('/admin/logout', [AdminAuthController::class, 'logoutAdmin']);
 
 
 Auth::routes();
