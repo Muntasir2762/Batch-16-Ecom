@@ -54,7 +54,7 @@
                                         <td>{{$category->name}}</td>
                                         <td>
                                             <a href="#" class="btn btn-primary">Edit</a>
-                                            <a href="{{url('/admin/category/delete/'.$category->id)}}" class="btn btn-danger">Delete</a>
+                                            <a href="{{url('/admin/category/delete/'.$category->id)}}" onclick="return confirm('Are you sure?')" class="btn btn-danger">Delete</a>
                                         </td>
                                     </tr>
                                     @endforeach
