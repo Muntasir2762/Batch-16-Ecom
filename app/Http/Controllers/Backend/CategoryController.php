@@ -30,6 +30,25 @@ class CategoryController extends Controller
         }
 
         $category->save();
+        return redirect('/admin/category/list');
+    }
+
+    public function categoryList ()
+    {
+        $categories = Category::all();
+        return view('backend.category.list', compact('categories'));
+    }
+
+    public function categoryDelete ($id)
+    {
+        $category = Category::find($id);
+
+        if($category->image && file_exists('backend/images/category/'.$category->image)){
+            unlink('backend/images/category/'.$category->image);
+        }
+
+        $category->delete();
+
         return redirect()->back();
     }
 }
