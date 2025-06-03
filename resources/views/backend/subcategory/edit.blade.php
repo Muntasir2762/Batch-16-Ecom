@@ -8,12 +8,12 @@
             <!--begin::Row-->
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="mb-0">Add New SubCategory</h3>
+                    <h3 class="mb-0">Edit SubCategory</h3>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Add New SubCategory</li>
+                        <li class="breadcrumb-item active" aria-current="page">Edit SubCategory</li>
                     </ol>
                 </div>
             </div>
@@ -34,17 +34,17 @@
                     <div class="card card-primary card-outline mb-4">
                         <!--begin::Header-->
                         <div class="card-header">
-                            <div class="card-title">Input SubCategory</div>
+                            <div class="card-title">Edit SubCategory</div>
                         </div>
                         <!--end::Header-->
                         <!--begin::Form-->
-                        <form action="{{url('/admin/sub-category/update/')}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{url('/admin/sub-category/update/'.$subCategory->id)}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <!--begin::Body-->
                             <div class="card-body">
                                 <div class="mb-3">
                                     <label for="name" class="form-label">SubCategory Name*</label>
-                                    <input type="text" class="form-control" name="name" id="name" required/>
+                                    <input type="text" class="form-control" name="name" id="name" value="{{$subCategory->name}}" required/>
                                 </div>
 
                                 <div class="mb-3">
@@ -52,7 +52,9 @@
                                     <select class="form-control" name="cat_id" id="cat_id">
                                         <option selected disabled>Select Category</option>
                                         @foreach ($categories as $category)
-                                            <option value="{{$category->id}}">{{$category->name}}</option>
+                                            <option value="{{$category->id}}" @if ($subCategory->cat_id == $category->id)
+                                                selected
+                                            @endif>{{$category->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>

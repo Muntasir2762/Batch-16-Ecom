@@ -38,4 +38,31 @@ class SubCategoryController extends Controller
         $subCategories = SubCategory::all();
         return view('backend.subcategory.list', compact('subCategories'));
     }
+
+    public function subCategoryDelete ($id)
+    {
+        $subCategory = SubCategory::find($id);
+        
+        $subCategory->delete();
+        return redirect()->back();
+    }
+
+    public function subCategoryEdit ($id)
+    {
+        $subCategory = SubCategory::find($id);
+        $categories = Category::all();
+        return view('backend.subcategory.edit', compact('subCategory', 'categories'));
+    }
+
+    public function subCategoryUpdate (Request $request, $id)
+    {
+        $subCategory = SubCategory::find($id);
+
+        $subCategory->name = $request->name;
+        $subCategory->slug = Str::slug($request->name);
+        $subCategory->cat_id = $request->cat_id;
+
+        $subCategory->save();
+        return redirect('admin/sub-category/list');
+    }
 }
