@@ -35,7 +35,7 @@ class SubCategoryController extends Controller
 
     public function subCategoryList ()
     {
-        $subCategories = SubCategory::all();
+        $subCategories = SubCategory::with('category')->get();
         return view('backend.subcategory.list', compact('subCategories'));
     }
 

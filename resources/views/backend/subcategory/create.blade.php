@@ -38,7 +38,7 @@
                         </div>
                         <!--end::Header-->
                         <!--begin::Form-->
-                        <form action="{{url('/admin/sub-category/update/')}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{url('/admin/sub-category/store')}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <!--begin::Body-->
                             <div class="card-body">
