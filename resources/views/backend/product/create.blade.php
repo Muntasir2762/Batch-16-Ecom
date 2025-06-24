@@ -74,6 +74,22 @@
                                     </div>
 
                                     <div class="col-6 mb-3">
+                                        <div class="form-group" id="color_fields">
+                                            <label for="color_name" class="form-label">Product Color (Optional)</label>
+                                            <input type="text" class="form-control mb-2" name="color_name[]" id="color_name" value="" />
+                                        </div>
+                                        <button type="button" class="btn btn-success float-end" id="add_color">Add More</button>
+                                    </div>
+
+                                    <div class="col-6 mb-3">
+                                        <div class="form-group" id="size_fields">
+                                            <label for="size_name" class="form-label">Product Size (Optional)</label>
+                                            <input type="text" class="form-control mb-2" name="size_name[]" id="size_name" value="" />
+                                        </div>
+                                        <button type="button" class="btn btn-success float-end" id="add_size">Add More</button>
+                                    </div>
+
+                                    <div class="col-6 mb-3">
                                         <label for="qty" class="form-label">Product Quantity*</label>
                                         <input type="number" class="form-control" name="qty" id="qty" required />
                                     </div>
@@ -106,17 +122,22 @@
 
                                     <div class="col-12 mb-3">
                                         <label for="description" class="form-label">Product Description*</label>
-                                        <textarea name="description" id="description" class="form-control" required></textarea>
+                                        <textarea name="description" id="summernote" class="form-control" required></textarea>
                                     </div>
 
                                     <div class="col-12 mb-3">
                                         <label for="product_policy" class="form-label">Product Policy*</label>
-                                        <textarea name="product_policy" id="product_policy" class="form-control" required></textarea>
+                                        <textarea name="product_policy" id="summernote2" class="form-control" required></textarea>
                                     </div>
 
                                     <div class="input-group mb-3">
-                                        <input type="file" class="form-control" name="image" id="image" required />
-                                        <label class="input-group-text" for="inputGroupFile02">Upload</label>
+                                        <input type="file" class="form-control" accept="image/*" name="image" id="image" required />
+                                        <label class="input-group-text" for="inputGroupFile02">Upload Main Image</label>
+                                    </div>
+
+                                    <div class="input-group mb-3">
+                                        <input type="file" class="form-control" accept="image/*" name="gallery_image[]" id="gallery_image" multiple required />
+                                        <label class="input-group-text" for="gallery_image">Upload Gallery Image</label>
                                     </div>
                                 </div>
                             </div>
@@ -139,3 +160,38 @@
     </div>
     <!--end::App Content-->
 @endsection
+
+@push('script')
+
+{{-- Summernote1 --}}
+<script>
+    $(document).ready(function() {
+        $('#summernote').summernote();
+    });
+</script>
+
+{{-- Summernote --}}
+<script>
+    $(document).ready(function() {
+        $('#summernote2').summernote();
+    });
+</script>
+
+{{-- Add More Color --}}
+<script>
+    $(document).ready(function(){
+        $("#add_color").click(function(){
+            $("#color_fields").append('<input type="text" class="form-control mb-2" name="color_name[]" id="color_name" value="" />')
+        })
+    })
+</script>
+
+{{-- Add More Size --}}
+<script>
+    $(document).ready(function(){
+        $("#add_size").click(function(){
+            $("#size_fields").append('<input type="text" class="form-control mb-2" name="size_name[]" id="size_name" value="" />')
+        })
+    })
+</script>
+@endpush
