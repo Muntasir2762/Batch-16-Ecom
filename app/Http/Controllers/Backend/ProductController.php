@@ -95,4 +95,10 @@ class ProductController extends Controller
 
         return redirect()->back();
     }
+
+    public function productList ()
+    {
+        $products = Product::with('category', 'subCategory')->get();
+        return view('backend.product.list', compact('products'));
+    }
 }
