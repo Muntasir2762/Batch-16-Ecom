@@ -80,6 +80,7 @@
                                             <label for="color_name" class="form-label">Product Color (Optional)</label>
                                             @foreach ($product->color as $singleColor)
                                                 <input type="text" class="form-control mb-2" value="{{$singleColor->color_name}}" name="color_name[]" id="color_name" value="" />
+                                                <a href="{{url('/admin/product/color/delete/'.$singleColor->id)}}" class="btn btn-danger mb-2">Delete</a>
                                             @endforeach
                                         </div>
                                         <button type="button" class="btn btn-success float-end" id="add_color">Add More</button>

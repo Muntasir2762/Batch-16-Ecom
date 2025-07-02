@@ -57,3 +57,5 @@ Route::get('/admin/product/list', [ProductController::class, 'productList']);
 Route::get('/admin/product/delete/{id}', [ProductController::class, 'productDelete']);
 Route::get('/admin/product/edit/{id}', [ProductController::class, 'productEdit']);
 Route::post('/admin/product/update/{id}', [ProductController::class, 'productUpdate']);
+
+Route::get('/admin/product/color/delete/{id}', [ProductController::class, 'colorDelete']);
