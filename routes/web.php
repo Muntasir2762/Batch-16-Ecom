@@ -59,3 +59,7 @@ Route::get('/admin/product/edit/{id}', [ProductController::class, 'productEdit']
 Route::post('/admin/product/update/{id}', [ProductController::class, 'productUpdate']);
 
 Route::get('/admin/product/color/delete/{id}', [ProductController::class, 'colorDelete']);
+Route::get('/admin/product/size/delete/{id}', [ProductController::class, 'sizeDelete']);
+Route::get('/admin/product/gallery-image/delete/{id}', [ProductController::class, 'galleryImageDelete']);
+Route::get('/admin/product/gallery-image/edit/{id}', [ProductController::class, 'galleryImageEdit']);
+Route::post('/admin/product/gallery-image/update/{id}', [ProductController::class, 'galleryImageUpdate']);

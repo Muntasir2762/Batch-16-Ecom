@@ -250,4 +250,52 @@ class ProductController extends Controller
 
         return redirect()->back();
     }
+
+    public function sizeDelete ($id)
+    {
+        $size = Size::find($id);
+        $size->delete();
+
+        return redirect()->back();
+    }
+
+    public function galleryImageDelete ($id)
+    {
+        $galleryImage = GalleryImage::find($id);
+
+        if($galleryImage->image && file_exists('backend/images/galleryimage/'.$galleryImage->image)){
+                unlink('backend/images/galleryimage/'.$galleryImage->image);
+        }
+
+        $galleryImage->delete();
+
+        return redirect()->back();
+
+    }
+
+    public function galleryImageEdit ($id)
+    {
+        $galleryImage = GalleryImage::with('product')->where('id', $id)->first();
+        return view('backend.product.edit-galleryimage', compact('galleryImage'));
+    }
+
+    public function galleryImageUpdate (Request $request, $id)
+    {
+        $galleryImage = GalleryImage::find($id);
+
+        if(isset($request->image)){
+
+            if($galleryImage->image && file_exists('backend/images/galleryimage/'.$galleryImage->image)){
+                    unlink('backend/images/galleryimage/'.$galleryImage->image);
+            }
+
+            $imageName = rand().'-galleryImage'.'.'.$request->image->extension(); //948094-galleryImage.jpg
+            $request->image->move('backend/images/galleryimage/',$imageName);
+        }
+
+        $galleryImage->image = $imageName;
+
+        $galleryImage->save();
+        return redirect('/admin/product/edit/'.$galleryImage->product_id);
+    }
 }

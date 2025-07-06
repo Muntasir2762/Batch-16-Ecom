@@ -91,6 +91,7 @@
                                             <label for="size_name" class="form-label">Product Size (Optional)</label>
                                             @foreach ($product->size as $singleSize)
                                                 <input type="text" class="form-control mb-2" value="{{$singleSize->size_name}}" name="size_name[]" id="size_name" value="" />
+                                                <a href="{{url('/admin/product/size/delete/'.$singleSize->id)}}" class="btn btn-danger mb-2">Delete</a>
                                             @endforeach
                                         </div>
                                         <button type="button" class="btn btn-success float-end" id="add_size">Add More</button>
@@ -153,7 +154,11 @@
                                         <input type="file" class="form-control" accept="image/*" name="gallery_image[]" id="gallery_image" multiple />
                                         <label class="input-group-text" for="gallery_image">Upload Gallery Image</label>
                                         @foreach ($product->galleryImage as $singleImage)
-                                            <img src="{{asset('backend/images/galleryimage/'.$singleImage->image)}}" height="100" width="100">
+                                            <img src="{{asset('backend/images/galleryimage/'.$singleImage->image)}}" height="100" class="mb-2" width="100">
+                                            <div class="mb-2">
+                                                <a href="{{url('/admin/product/gallery-image/delete/'.$singleImage->id)}}" class="btn btn-danger">Delete</a>
+                                                <a href="{{url('/admin/product/gallery-image/edit/'.$singleImage->id)}}" class="btn btn-info">Edit</a>
+                                            </div>
                                         @endforeach
                                     </div>
                                 </div>
