@@ -10,7 +10,7 @@ class FrontendController extends Controller
 {
     public function index(){
 
-        $categories = Category::orderBy('name', 'asc')->get();
+        $categories = Category::orderBy('name', 'asc')->with('subCategory')->get();
         $hotProducts = Product::where('product_type', 'hot')->orderBy('id', 'desc')->get();
         $newProducts = Product::where('product_type', 'new')->orderBy('id', 'desc')->get();
         $regularProducts = Product::where('product_type', 'regular')->orderBy('id', 'desc')->get();
@@ -29,9 +29,11 @@ class FrontendController extends Controller
         return view('frontend.return-process');
     }
 
-    public function productDetails ()
+    public function productDetails ($slug)
     {
-        return view('frontend.product-details');
+        $product = Product::where('slug', $slug)->with('color', 'size', 'galleryImage')->first();
+        $categories = Category::orderBy('name', 'asc')->get();
+        return view('frontend.product-details', compact('product', 'categories'));
     }
 
     public function typeProducts ($type)
