@@ -17,6 +17,10 @@ Route::get('/type-products/{type}', [FrontendController::class, 'typeProducts'])
 Route::get('/view-cart-products', [FrontendController::class, 'viewCart']);
 Route::get('/checkout', [FrontendController::class, 'checkOut']);
 
+//Add to Cart Routes...
+Route::post('/product-details/add-to-cart/{product_id}', [FrontendController::class, 'addToCartDetails']);
+Route::get('/add-to-cart/{product_id}', [FrontendController::class, 'addToCart']);
+
 // Policy...
 Route::get('/privacy-policy', [FrontendController::class, 'privacyPolicy']);
 Route::get('/terms-conditions', [FrontendController::class, 'termsCondition']);
