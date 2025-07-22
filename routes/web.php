@@ -20,6 +20,7 @@ Route::get('/checkout', [FrontendController::class, 'checkOut']);
 //Add to Cart Routes...
 Route::post('/product-details/add-to-cart/{product_id}', [FrontendController::class, 'addToCartDetails']);
 Route::get('/add-to-cart/{product_id}', [FrontendController::class, 'addToCart']);
+Route::get('/add-to-cart/delete/{id}', [FrontendController::class, 'addToCartDelete']);
 
 // Policy...
 Route::get('/privacy-policy', [FrontendController::class, 'privacyPolicy']);
