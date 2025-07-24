@@ -17,6 +17,10 @@ Route::get('/type-products/{type}', [FrontendController::class, 'typeProducts'])
 Route::get('/view-cart-products', [FrontendController::class, 'viewCart']);
 Route::get('/checkout', [FrontendController::class, 'checkOut']);
 
+//Order Placing Process...
+Route::post('/confirm-order', [FrontendController::class, 'confirmOrder']);
+Route::get('/success-order/{invoiceid}', [FrontendController::class, 'successOrder']);
+
 //Add to Cart Routes...
 Route::post('/product-details/add-to-cart/{product_id}', [FrontendController::class, 'addToCartDetails']);
 Route::get('/add-to-cart/{product_id}', [FrontendController::class, 'addToCart']);
