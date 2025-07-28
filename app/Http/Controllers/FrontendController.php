@@ -119,6 +119,7 @@ class FrontendController extends Controller
             }
 
             $cart->save();
+            toastr()->error('Added to cart');
             return redirect()->back();
         }
 
@@ -133,6 +134,7 @@ class FrontendController extends Controller
             }
 
             $cartProduct->save();
+            toastr()->error('Added to cart');
             return redirect()->back();
         }
     }
