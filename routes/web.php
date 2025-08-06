@@ -4,6 +4,7 @@ use App\Http\Controllers\Backend\AdminAuthController;
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\SettingsController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\FrontendController;
 use Illuminate\Support\Facades\Route;
@@ -35,6 +36,7 @@ Route::get('/refund-policy', [FrontendController::class, 'refundPolicy']);
 Route::get('/payment-policy', [FrontendController::class, 'paymentPolicy']);
 Route::get('/about-us', [FrontendController::class, 'aboutUs']);
 Route::get('/contact-us', [FrontendController::class, 'contactUs']);
+Route::post('/contact-message/store', [FrontendController::class, 'contactMessageStore']);
 
 //Product Searching...
 Route::get('/search-products', [FrontendController::class, 'searchProduct']);
@@ -77,3 +79,7 @@ Route::get('/admin/product/size/delete/{id}', [ProductController::class, 'sizeDe
 Route::get('/admin/product/gallery-image/delete/{id}', [ProductController::class, 'galleryImageDelete']);
 Route::get('/admin/product/gallery-image/edit/{id}', [ProductController::class, 'galleryImageEdit']);
 Route::post('/admin/product/gallery-image/update/{id}', [ProductController::class, 'galleryImageUpdate']);
+
+//Settings...
+Route::get('/admin/general-settings', [SettingsController::class, 'showSettings']);
+Route::post('/admin/general-settings/update', [SettingsController::class, 'updateSettings']);

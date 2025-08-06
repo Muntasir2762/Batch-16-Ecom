@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Banner;
 use App\Models\Cart;
 use App\Models\Category;
+use App\Models\ContactMessage;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\Policy;
@@ -60,7 +61,8 @@ class FrontendController extends Controller
 
     public function returnProcess ()
     {
-        return view('frontend.return-process');
+        $returnPolicy = Policy::select('return_policy')->first();
+        return view('frontend.return-process', compact('returnPolicy'));
     }
 
     public function productDetails ($slug)
@@ -281,6 +283,21 @@ class FrontendController extends Controller
     public function contactUs ()
     {
         return view('frontend.contact-us');
+    }
+
+    public function contactMessageStore (Request $request)
+    {
+        $conatctMessage = new ContactMessage();
+
+        $conatctMessage->name = $request->name;
+        $conatctMessage->phone = $request->phone;
+        $conatctMessage->email = $request->email;
+        $conatctMessage->message = $request->message;
+
+        $conatctMessage->save();
+
+        toastr()->success('Message Sent Successfully!');
+        return redirect()->back();
     }
 
     public function searchProduct (Request $request)
