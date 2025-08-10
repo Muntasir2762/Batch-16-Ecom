@@ -48,43 +48,39 @@
                                 </div>
                                 <div class="mb-3">
                                     <label for="email" class="form-label">Email*</label>
-                                    <input type="email" class="form-control" name="email" id="email" required/>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="email" class="form-label">Email*</label>
-                                    <input type="email" class="form-control" name="email" id="email" required/>
+                                    <input type="email" class="form-control" name="email" value="{{$settings->email}}" id="email" required/>
                                 </div>
                                 <div class="mb-3">
                                     <label for="address" class="form-label">Address(Optional)</label>
-                                    <textarea name="address" class="form-control" id="address"></textarea>
+                                    <textarea name="address" class="form-control" id="address">{{ $settings->address }}</textarea>
                                 </div>
                                 <div class="mb-3">
                                     <label for="facebook" class="form-label">Facebook Link(Optional)</label>
-                                    <input type="text" class="form-control" name="facebook" id="facebook"/>
+                                    <input type="text" class="form-control" value="{{$settings->facebook}}" name="facebook" id="facebook"/>
                                 </div>
                                 <div class="mb-3">
                                     <label for="twitter" class="form-label">Twitter Link(Optional)</label>
-                                    <input type="text" class="form-control" name="twitter" id="twitter"/>
+                                    <input type="text" class="form-control" value="{{$settings->twitter}}" name="twitter" id="twitter"/>
                                 </div>
                                 <div class="mb-3">
                                     <label for="instagram" class="form-label">Instagram Link(Optional)</label>
-                                    <input type="text" class="form-control" name="instagram" id="instagram"/>
+                                    <input type="text" class="form-control" value="{{$settings->instagram}}" name="instagram" id="instagram"/>
                                 </div>
                                 <div class="mb-3">
                                     <label for="youtube" class="form-label">Youtube Link(Optional)</label>
-                                    <input type="text" class="form-control" name="youtube" id="youtube"/>
+                                    <input type="text" class="form-control" value="{{$settings->youtube}}" name="youtube" id="youtube"/>
                                 </div>
                                 <div class="mb-3">
                                     <label for="free_shipping_amount" class="form-label">Free Shipping Amount*</label>
-                                    <input type="number" class="form-control" name="free_shipping_amount" id="free_shipping_amount" required/>
+                                    <input type="number" class="form-control" value="{{$settings->free_shipping_amount}}" name="free_shipping_amount" id="free_shipping_amount" required/>
                                 </div>
                                 <div class="input-group mb-3">
                                     <input type="file" class="form-control" name="logo" id="logo" />
-                                    <label class="input-group-text" for="inputGroupFile02">Upload Logo</label>
+                                    <label class="input-group-text" for="inputGroupFile02">Upload Logo (Size: 150X60 pixel)</label>
                                     <img src="{{asset('backend/images/settings/'.$settings->logo)}}" height="60" width="150">
                                 </div>
                                 <div class="input-group mb-3">
-                                    <input type="file" class="form-control" name="logo" id="logo" />
+                                    <input type="file" class="form-control" name="hero_image" id="hero_image" />
                                     <label class="input-group-text" for="inputGroupFile02">Upload Slider</label>
                                     <img src="{{asset('backend/images/settings/'.$settings->hero_image)}}" height="400" width="1200">
                                 </div>

@@ -276,7 +276,7 @@ class FrontendController extends Controller
 
     public function aboutUs ()
     {
-        $aboutUs = Policy::select('	about_us')->first();
+        $aboutUs = Policy::select('about_us')->first();
         return view('frontend.about-us', compact('aboutUs'));
     }
 
