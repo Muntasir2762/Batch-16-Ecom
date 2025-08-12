@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\AdminAuthController;
 use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SettingsController;
 use App\Http\Controllers\Backend\SubCategoryController;
@@ -88,3 +89,10 @@ Route::post('/admin/policies/update', [SettingsController::class, 'updatePolicie
 Route::get('/admin/show-banner', [SettingsController::class, 'showBanners']);
 Route::get('/admin/edit-banner/{id}', [SettingsController::class, 'editBanner']);
 Route::post('/admin/update-banner/{id}', [SettingsController::class, 'updateBanner']);
+
+//Contact Message...
+Route::get('/admin/contact-message/list', [SettingsController::class, 'showContactMessage']);
+Route::get('/admin/contact-message/delete/{id}', [SettingsController::class, 'deleteContactMessage']);
+
+//Orders...
+Route::get('/admin/orders/all', [OrderController::class, 'showOrders']);
