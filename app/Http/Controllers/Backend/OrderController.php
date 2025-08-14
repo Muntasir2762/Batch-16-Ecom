@@ -18,4 +18,13 @@ class OrderController extends Controller
         $orders = Order::with('orderDetails')->paginate(50);
         return view('backend.order.show-orders', compact('orders'));
     }
+
+    public function updateOrderStatus (Request $request , $id)
+    {
+        $order = Order::find($id);
+        $order->status = $request->status;
+
+        $order->save();
+        return redirect()->back();
+    }
 }

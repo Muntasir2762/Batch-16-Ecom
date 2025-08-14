@@ -51,102 +51,57 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>2025-07-24 17:47:03</td>
-                                        <td>XY-1</td>
+                                    @foreach ($orders as $order)
+                                        <tr>
+                                        <td>{{$loop->index+1}}</td>
+                                        <td>{{$order->created_at}}</td>
+                                        <td>{{$order->invoice_number}}</td>
                                         <td>
-                                            <img src="https://placehold.co/100x100">
-                                            Headphone X 1 <br>
-
-                                            <img src="https://placehold.co/100x100">
-                                            Headphone X 1 <br>
-
-                                            <img src="https://placehold.co/100x100">
-                                            Headphone X 1 <br>
+                                            @foreach ($order->orderDetails as $details)
+                                                <img src="{{asset('backend/images/product/'.$details->product->image)}}" height="100" width="100">
+                                                {{$details->product->name}} X {{$details->qty}} <br>
+                                            @endforeach
                                         </td>
                                         <td>
-                                            <p style="color: red">IP: 192.168.0.1</p>
-                                            Name: Test Name
-                                            <p style="color: green"><b>Phone: 0165676678</b></p>
-                                            <strong class="text-primary">Address: Uttara, Sector-9, Dhaka</strong>
+                                            <p style="color: red">IP: {{$order->ip_address}}</p>
+                                            Name: {{$order->name}}
+                                            <p style="color: green"><b>Phone: {{$order->phone}}</b></p>
+                                            <strong class="text-primary">Address: {{$order->address}}</strong>
                                         </td>
-                                        <td>12000</td>
-                                        <td>80</td>
+                                        <td>{{$order->price}}</td>
+                                        <td>{{$order->charge}}</td>
                                         <td>
-                                            Steadfast
-                                            <p class="text-success">GHHJG7667</p>
+                                            {{$order->courier_name??"Courier Not Selected"}}
+                                            <p class="text-success">{{$order->consignment_id}}</p>
                                         </td>
-                                        <td>Pending</td>
+                                        <td>
+                                            <form action="{{url('/admin/order/status/'.$order->id)}}" method="GET" id="statusUpdate">
+                                                @csrf
+                                                <select name="status" class="form-control" onchange="statusFormSubmission()">
+                                                    <option value="pending" @if ($order->status == "pending")
+                                                        selected
+                                                    @endif>Pending</option>
+                                                    <option value="cancelled" @if ($order->status == "cancelled")
+                                                        selected
+                                                    @endif>Cancel</option>
+                                                    <option value="confirmed" @if ($order->status == "confirmed")
+                                                        selected
+                                                    @endif>Confirm</option>
+                                                    <option value="delivered" @if ($order->status == "delivered")
+                                                        selected
+                                                    @endif>Delivered</option>
+                                                    <option value="returned" @if ($order->status == "returned")
+                                                        selected
+                                                    @endif>Return</option>
+                                                </select>
+                                            </form>
+                                        </td>
                                         <td>
                                              <a href="#" class="btn btn-primary">Details</a>
                                             <a href="#" onclick="return confirm('Are you sure?')" class="btn btn-danger">Delete</a>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>2025-07-24 17:47:03</td>
-                                        <td>XY-1</td>
-                                        <td>
-                                            <img src="https://placehold.co/100x100">
-                                            Headphone X 1 <br>
-
-                                            <img src="https://placehold.co/100x100">
-                                            Headphone X 1 <br>
-
-                                            <img src="https://placehold.co/100x100">
-                                            Headphone X 1 <br>
-                                        </td>
-                                        <td>
-                                            <p style="color: red">IP: 192.168.0.1</p>
-                                            Name: Test Name
-                                            <p style="color: green"><b>Phone: 0165676678</b></p>
-                                            <strong class="text-primary">Address: Uttara, Sector-9, Dhaka</strong>
-                                        </td>
-                                        <td>12000</td>
-                                        <td>80</td>
-                                        <td>
-                                            Steadfast
-                                            <p class="text-success">GHHJG7667</p>
-                                        </td>
-                                        <td>Pending</td>
-                                        <td>
-                                             <a href="#" class="btn btn-primary">Details</a>
-                                            <a href="#" onclick="return confirm('Are you sure?')" class="btn btn-danger">Delete</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>2025-07-24 17:47:03</td>
-                                        <td>XY-1</td>
-                                        <td>
-                                            <img src="https://placehold.co/100x100">
-                                            Headphone X 1 <br>
-
-                                            <img src="https://placehold.co/100x100">
-                                            Headphone X 1 <br>
-
-                                            <img src="https://placehold.co/100x100">
-                                            Headphone X 1 <br>
-                                        </td>
-                                        <td>
-                                            <p style="color: red">IP: 192.168.0.1</p>
-                                            Name: Test Name
-                                            <p style="color: green"><b>Phone: 0165676678</b></p>
-                                            <strong class="text-primary">Address: Uttara, Sector-9, Dhaka</strong>
-                                        </td>
-                                        <td>12000</td>
-                                        <td>80</td>
-                                        <td>
-                                            Steadfast
-                                            <p class="text-success">GHHJG7667</p>
-                                        </td>
-                                        <td>Pending</td>
-                                        <td>
-                                             <a href="#" class="btn btn-primary">Details</a>
-                                            <a href="#" onclick="return confirm('Are you sure?')" class="btn btn-danger">Delete</a>
-                                        </td>
-                                    </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -162,3 +117,12 @@
     </div>
     <!--end::App Content-->
 @endsection
+
+@push('script')
+    <script>
+        function statusFormSubmission()
+        {
+            document.getElementById('statusUpdate').submit();
+        }
+    </script>
+@endpush
