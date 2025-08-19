@@ -97,3 +97,6 @@ Route::get('/admin/contact-message/delete/{id}', [SettingsController::class, 'de
 //Orders...
 Route::get('/admin/orders/all', [OrderController::class, 'showOrders']);
 Route::get('/admin/order/status/{id}', [OrderController::class, 'updateOrderStatus']);
+Route::get('/admin/order/delete/{id}', [OrderController::class, 'deleteOrder']);
+Route::get('/admin/order/edit/{id}', [OrderController::class, 'editOrder']);
+Route::post('/admin/order/update/{id}', [OrderController::class, 'updateOrder']);

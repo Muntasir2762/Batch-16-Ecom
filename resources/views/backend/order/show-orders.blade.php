@@ -29,6 +29,20 @@
             <!--begin::Row-->
             <div class="row">
                 <div class="col-md-12">
+                    <form action="{{url('/admin/orders/all')}}" method="GET">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-8">
+                                <input type="text" class="form-control" name="search" id="search" required>
+                            </div>
+                            <div class="col-md-4">
+                                <button type="submit" class="btn btn-primary">Search</button>
+                                <a href="{{url('/admin/orders/all')}}" class="btn btn-danger">Clear</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-12">
                     <div class="card mb-4">
                         <div class="card-header">
                             <h3 class="card-title">Manage Orders</h3>
@@ -75,9 +89,9 @@
                                             <p class="text-success">{{$order->consignment_id}}</p>
                                         </td>
                                         <td>
-                                            <form action="{{url('/admin/order/status/'.$order->id)}}" method="GET" id="statusUpdate">
+                                            <form action="{{url('/admin/order/status/'.$order->id)}}" method="GET" id="statusUpdate{{$order->id}}">
                                                 @csrf
-                                                <select name="status" class="form-control" onchange="statusFormSubmission()">
+                                                <select name="status" class="form-control" onchange="statusFormSubmission({{$order->id}})">
                                                     <option value="pending" @if ($order->status == "pending")
                                                         selected
                                                     @endif>Pending</option>
@@ -97,8 +111,8 @@
                                             </form>
                                         </td>
                                         <td>
-                                             <a href="#" class="btn btn-primary">Details</a>
-                                            <a href="#" onclick="return confirm('Are you sure?')" class="btn btn-danger">Delete</a>
+                                             <a href="{{url('/admin/order/edit/'.$order->id)}}" class="btn btn-primary">Details</a>
+                                            <a href="{{url('/admin/order/delete/'.$order->id)}}" onclick="return confirm('Are you sure?')" class="btn btn-danger">Delete</a>
                                         </td>
                                     </tr>
                                     @endforeach
@@ -120,9 +134,9 @@
 
 @push('script')
     <script>
-        function statusFormSubmission()
+        function statusFormSubmission(id)
         {
-            document.getElementById('statusUpdate').submit();
+            document.getElementById('statusUpdate'+id).submit();
         }
     </script>
 @endpush
