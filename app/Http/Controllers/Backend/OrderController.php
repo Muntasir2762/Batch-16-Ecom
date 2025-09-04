@@ -95,7 +95,8 @@ class OrderController extends Controller
 
         $order = Order::find($order_id);
 
-        $apiEndpoint = "https://portal.packzy.com/api/v1/create_order";
+       if($order->courier_name == "steadfast"){
+         $apiEndpoint = "https://portal.packzy.com/api/v1/create_order";
 
         $header = [
             'Api-Key' => "jla9q5zsl2a3x70ab8q26swdk5bkb8gr",
@@ -127,7 +128,13 @@ class OrderController extends Controller
             $order->consignment_id = $jsonData['consignment']['consignment_id'];
             $order->save();
         }
+       }
 
+       elseif($order->courier_name == "pathao"){
+
+       }
+
+        toastr()->success("Courier entry is successfull");
         return redirect()->back();
     }
 }
