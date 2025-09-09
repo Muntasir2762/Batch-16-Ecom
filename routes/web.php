@@ -107,3 +107,6 @@ Route::get('/admin/order-courier-entry/{order_id}', [OrderController::class, 'co
 //Change Credentials...
 Route::get('/admin/change-credentials', [SettingsController::class, 'showCredentials']);
 Route::post('/admin/update-credentials', [SettingsController::class, 'updateCredentials']);
+
+//Invoice Print...
+Route::get('/admin/print-invoice/{order_id}', [OrderController::class, 'printInvoice']);
