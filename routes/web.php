@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\SettingsController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\FrontendController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 
@@ -44,11 +45,11 @@ Route::get('/search-products', [FrontendController::class, 'searchProduct']);
 
 
 //Admin Auth Routes..
-Route::get('/admin/login', [AdminAuthController::class, 'loginForm']);
+Route::get('/admin/login', [AdminAuthController::class, 'loginForm'])->name('admin.login');
 Route::get('/admin/logout', [AdminAuthController::class, 'logoutAdmin']);
 
 
-Auth::routes();
+Auth::routes(['register' => false]);
 Route::get('/admin/dashboard', [AdminController::class, 'adminDashboard']);
 
 //Category routes...
@@ -110,3 +111,4 @@ Route::post('/admin/update-credentials', [SettingsController::class, 'updateCred
 
 //Invoice Print...
 Route::get('/admin/print-invoice/{order_id}', [OrderController::class, 'printInvoice']);
+Route::post('/admin/bulk-print-invoice', [OrderController::class, 'printBulkInvoice']);

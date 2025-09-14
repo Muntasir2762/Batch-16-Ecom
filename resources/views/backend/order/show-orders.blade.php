@@ -29,7 +29,7 @@
             <!--begin::Row-->
             <div class="row">
                 <div class="col-md-12">
-                    <form action="{{url('/admin/orders/'.$status)}}" method="GET">
+                    <form action="{{ url('/admin/orders/' . $status) }}" method="GET">
                         @csrf
                         <div class="row">
                             <div class="col-md-8">
@@ -37,97 +37,117 @@
                             </div>
                             <div class="col-md-4">
                                 <button type="submit" class="btn btn-primary">Search</button>
-                                <a href="{{url('/admin/orders/'.$status)}}" class="btn btn-danger">Clear</a>
+                                <a href="{{ url('/admin/orders/' . $status) }}" class="btn btn-danger">Clear</a>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="col-md-12">
-                    <div class="card mb-4">
-                        <div class="card-header">
-                            <h3 class="card-title">Manage Orders</h3>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body p-0">
-                            <table class="table table-sm">
-                                <thead>
-                                    <tr>
-                                        <th>SL</th>
-                                        <th>Order Date</th>
-                                        <th>Invoice</th>
-                                        <th>Product(s)</th>
-                                        <th>Customer Info</th>
-                                        <th>Price</th>
-                                        <th>Delivery Charge</th>
-                                        <th>Courier</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($orders as $order)
+                    <form action="{{url('/admin/bulk-print-invoice')}}" method="POST">
+                        @csrf
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <h3 class="card-title">Manage Orders</h3>
+                            </div>
+                            <div>
+                                <button type="submit" class="btn btn-primary">Print Selected</button>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body p-0">
+                                <table class="table table-sm">
+                                    <thead>
                                         <tr>
-                                        <td>{{$loop->index+1}}</td>
-                                        <td>{{$order->created_at}}</td>
-                                        <td>
-                                            {{$order->invoice_number}} <br>
-                                            <a href="{{url('/admin/print-invoice/'.$order->id)}}" class="btn btn-success">Print</a>
+                                            <th>
+                                                <input type="checkbox" id="selectAll">
+                                            </th>
+                                            <th>SL</th>
+                                            <th>Order Date</th>
+                                            <th>Invoice</th>
+                                            <th>Product(s)</th>
+                                            <th>Customer Info</th>
+                                            <th>Price</th>
+                                            <th>Delivery Charge</th>
+                                            <th>Courier</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($orders as $order)
+                                            <tr>
+                                                <td>
+                                                    <input type="checkbox" name="order_id[]" value="{{ $order->id }}" class="orderCheckbox">
+                                                </td>
+                                                <td>{{ $loop->index + 1 }}</td>
+                                                <td>{{ $order->created_at }}</td>
+                                                <td>
+                                                    {{ $order->invoice_number }} <br>
+                                                    <a href="{{ url('/admin/print-invoice/' . $order->id) }}"
+                                                        class="btn btn-success">Print</a>
 
-                                        </td>
-                                        <td>
-                                            @foreach ($order->orderDetails as $details)
-                                                <img src="{{asset('backend/images/product/'.$details->product->image)}}" height="100" width="100">
-                                                {{$details->product->name}} X {{$details->qty}} <br>
-                                            @endforeach
-                                        </td>
-                                        <td>
-                                            <p style="color: red">IP: {{$order->ip_address}}</p>
-                                            Name: {{$order->name}}
-                                            <p style="color: green"><b>Phone: {{$order->phone}}</b></p>
-                                            <strong class="text-primary">Address: {{$order->address}}</strong>
-                                        </td>
-                                        <td>{{$order->price}}</td>
-                                        <td>{{$order->charge}}</td>
-                                        <td>
-                                            {{$order->courier_name??"Courier Not Selected"}}
-                                            <p class="text-success">{{$order->consignment_id}}</p>
-                                            @if ($order->courier_name != null && $order->consignment_id == null)
-                                                <a href="{{url('/admin/order-courier-entry/'.$order->id)}}" class="btn btn-success">Entry Courier</a>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <form action="{{url('/admin/order/status/'.$order->id)}}" method="GET" id="statusUpdate{{$order->id}}">
-                                                @csrf
-                                                <select name="status" class="form-control" onchange="statusFormSubmission({{$order->id}})">
-                                                    <option value="pending" @if ($order->status == "pending")
-                                                        selected
-                                                    @endif>Pending</option>
-                                                    <option value="cancelled" @if ($order->status == "cancelled")
-                                                        selected
-                                                    @endif>Cancel</option>
-                                                    <option value="confirmed" @if ($order->status == "confirmed")
-                                                        selected
-                                                    @endif>Confirm</option>
-                                                    <option value="delivered" @if ($order->status == "delivered")
-                                                        selected
-                                                    @endif>Delivered</option>
-                                                    <option value="returned" @if ($order->status == "returned")
-                                                        selected
-                                                    @endif>Return</option>
-                                                </select>
-                                            </form>
-                                        </td>
-                                        <td>
-                                             <a href="{{url('/admin/order/edit/'.$order->id)}}" class="btn btn-primary">Details</a>
-                                            <a href="{{url('/admin/order/delete/'.$order->id)}}" onclick="return confirm('Are you sure?')" class="btn btn-danger">Delete</a>
-                                        </td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                                </td>
+                                                <td>
+                                                    @foreach ($order->orderDetails as $details)
+                                                        <img src="{{ asset('backend/images/product/' . $details->product->image) }}"
+                                                            height="100" width="100">
+                                                        {{ $details->product->name }} X {{ $details->qty }} <br>
+                                                    @endforeach
+                                                </td>
+                                                <td>
+                                                    <p style="color: red">IP: {{ $order->ip_address }}</p>
+                                                    Name: {{ $order->name }}
+                                                    <p style="color: green"><b>Phone: {{ $order->phone }}</b></p>
+                                                    <strong class="text-primary">Address: {{ $order->address }}</strong>
+                                                </td>
+                                                <td>{{ $order->price }}</td>
+                                                <td>{{ $order->charge }}</td>
+                                                <td>
+                                                    {{ $order->courier_name ?? 'Courier Not Selected' }}
+                                                    <p class="text-success">{{ $order->consignment_id }}</p>
+                                                    @if ($order->courier_name != null && $order->consignment_id == null)
+                                                        <a href="{{ url('/admin/order-courier-entry/' . $order->id) }}"
+                                                            class="btn btn-success">Entry Courier</a>
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    <form action="{{ url('/admin/order/status/' . $order->id) }}"
+                                                        method="GET" id="statusUpdate{{ $order->id }}">
+                                                        @csrf
+                                                        <select name="status" class="form-control"
+                                                            onchange="statusFormSubmission({{ $order->id }})">
+                                                            <option value="pending"
+                                                                @if ($order->status == 'pending') selected @endif>Pending
+                                                            </option>
+                                                            <option value="cancelled"
+                                                                @if ($order->status == 'cancelled') selected @endif>Cancel
+                                                            </option>
+                                                            <option value="confirmed"
+                                                                @if ($order->status == 'confirmed') selected @endif>Confirm
+                                                            </option>
+                                                            <option value="delivered"
+                                                                @if ($order->status == 'delivered') selected @endif>Delivered
+                                                            </option>
+                                                            <option value="returned"
+                                                                @if ($order->status == 'returned') selected @endif>Return
+                                                            </option>
+                                                        </select>
+                                                    </form>
+                                                </td>
+                                                <td>
+                                                    <a href="{{ url('/admin/order/edit/' . $order->id) }}"
+                                                        class="btn btn-primary">Details</a>
+                                                    <a href="{{ url('/admin/order/delete/' . $order->id) }}"
+                                                        onclick="return confirm('Are you sure?')"
+                                                        class="btn btn-danger">Delete</a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                            <!-- /.card-body -->
                         </div>
-                        <!-- /.card-body -->
-                    </div>
+                    </form>
                     <!-- /.card -->
                 </div>
                 <!-- /.col -->
@@ -141,9 +161,15 @@
 
 @push('script')
     <script>
-        function statusFormSubmission(id)
-        {
-            document.getElementById('statusUpdate'+id).submit();
+        function statusFormSubmission(id) {
+            document.getElementById('statusUpdate' + id).submit();
         }
+    </script>
+
+    <script>
+        document.getElementById('selectAll').addEventListener('change', function(){
+            let checkboxes = document.querySelectorAll('.orderCheckbox');
+            checkboxes.forEach(checkBox => checkBox.checked = this.checked);
+        });
     </script>
 @endpush

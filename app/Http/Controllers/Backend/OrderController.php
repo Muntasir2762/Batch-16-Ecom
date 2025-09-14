@@ -144,4 +144,12 @@ class OrderController extends Controller
         $order = Order::with('orderDetails')->where('id', $order_id)->first();
         return view('backend.order.invoice', compact('order'));
     }
+
+    public function printBulkInvoice (Request $request)
+    {
+        $orderIds = $request->order_id;
+        $orders = Order::with('orderDetails')->whereIn('id', $orderIds)->get();
+
+        return view('backend.order.invoice-bulk', compact('orders'));
+    }
 }
