@@ -157,6 +157,7 @@
             }).then(res => res.json()).then(data => {
                 alert("Updated Successfully");
             })
+
         }
     </script>
 @endpush
