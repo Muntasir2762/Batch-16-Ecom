@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ConfirmOrderRequest;
 use App\Models\Banner;
 use App\Models\Cart;
 use App\Models\Category;
@@ -196,8 +197,9 @@ class FrontendController extends Controller
         return view('frontend.checkout');
     }
 
-    public function confirmOrder (Request $request)
+    public function confirmOrder (ConfirmOrderRequest $request)
     {
+
         $order = new Order();
 
         $order->ip_address = $request->ip();

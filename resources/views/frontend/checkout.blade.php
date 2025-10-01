@@ -12,14 +12,20 @@
                                     <h4 class="title">Billing / Shipping Details</h4>
                                     <div class="row">
                                         <div class="col-md-6">
-                                            <input type="text" name="name" class="form-control" placeholder="Enter Full Name"/>
+                                            <input type="text" name="name" value="{{old('name')}}" class="form-control" placeholder="Enter Full Name"/>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="text" name="phone" class="form-control" placeholder="Phone *" required/>
+                                            <input type="text" name="phone" value="{{old('phone')}}" class="form-control" placeholder="Phone *"/>
+                                            @error('phone')
+                                                <span class="text-danger">{{$message}}</span>
+                                            @enderror
                                         </div>
-                                        <div class="col-md-12">
+                                        <div class="col-md-12 mt-3">
                                             <textarea rows="4" name="address" class="form-control" id="address"
-                                                placeholder="Enter Full Address"></textarea>
+                                                placeholder="Enter Full Address">{{old('address')}}</textarea>
+                                            @error('address')
+                                                <span class="text-danger">{{$message}}</span>
+                                            @enderror
                                         </div>
                                         @php
                                             $totalPrice = 0;
@@ -32,14 +38,14 @@
                                         <div class="col-md-12 mt-3">
                                             @if ($totalPrice >= 20000)
                                             <div style="background: lightgrey;padding: 10px;margin-bottom: 10px;">
-                                                <input type="radio" id="inside_dhaka" name="charge" checked value="0" onclick=""/>
+                                                <input type="radio" id="inside_dhaka" name="charge" value="0" onclick=""/>
                                                 <label for="inside_dhaka"
                                                     style="font-size: 18px;font-weight: 600;color: #000;">Free Delivery (0
                                                     Tk.)</label>
                                             </div>
                                             @else
                                             <div style="background: lightgrey;padding: 10px;margin-bottom: 10px;">
-                                                <input type="radio" id="inside_dhaka" name="charge" checked value="80" onclick="insideDhakaCharge()"/>
+                                                <input type="radio" id="inside_dhaka" name="charge" value="80" onclick="insideDhakaCharge()"/>
                                                 <label for="inside_dhaka"
                                                     style="font-size: 18px;font-weight: 600;color: #000;">Inside Dhaka (80
                                                     Tk.)</label>
@@ -52,6 +58,9 @@
                                             </div>
                                             @endif
                                         </div>
+                                        @error('charge')
+                                            <span class="text-danger">{{$message}}</span>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
