@@ -161,6 +161,32 @@
                     </ul>
                 </li>
 
+                @if (Auth::user()->role == 'admin')
+                    <li class="nav-item menu-open">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon bi bi-speedometer"></i>
+                        <p>
+                            User
+                            <i class="nav-arrow bi bi-chevron-right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{url('/admin/user/list')}}" class="nav-link">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>List</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{url('/admin/user/create')}}" class="nav-link">
+                                <i class="nav-icon bi bi-circle"></i>
+                                <p>Add New User</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                @endif
+
                 <li class="nav-item menu-open">
                     <a href="#" class="nav-link">
                         <i class="nav-icon bi bi-speedometer"></i>

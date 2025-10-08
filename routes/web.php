@@ -5,6 +5,7 @@ use App\Http\Controllers\Backend\AdminController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\RoleUserController;
 use App\Http\Controllers\Backend\SettingsController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\FrontendController;
@@ -117,3 +118,12 @@ Route::post('/admin/update-credentials', [SettingsController::class, 'updateCred
 //Invoice Print...
 Route::get('/admin/print-invoice/{order_id}', [OrderController::class, 'printInvoice']);
 Route::post('/admin/bulk-print-invoice', [OrderController::class, 'printBulkInvoice']);
+
+//User Routes..
+Route::middleware(['role:admin'])->group(function(){
+    Route::get('/admin/user/list', [RoleUserController::class, 'userList']);
+    Route::get('/admin/user/create', [RoleUserController::class, 'userCreate']);
+    Route::post('/admin/user/store', [RoleUserController::class, 'userStore']);
+    Route::get('/admin/user/edit/{id}', [RoleUserController::class, 'userEdit']);
+    Route::post('/admin/user/update/{id}', [RoleUserController::class, 'userUpdate']);
+});
