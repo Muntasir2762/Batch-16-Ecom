@@ -9,6 +9,8 @@ use App\Models\Policy;
 use App\Models\Settings;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class SettingsController extends Controller
 {
@@ -146,12 +148,30 @@ class SettingsController extends Controller
 
     public function updateCredentials (Request $request)
     {
+
+        $request->validate([
+            'password' => 'required|min:8|confirmed',
+        ]);
+
         $user = User::first();
 
         $user->name = $request->name;
         $user->email = $request->email;
 
+        if(isset($request->old_password)){
+            if(!Hash::check($request->old_password, $user->password)){ //true | false
+                toastr()->error("Old Password doesn't match");
+                return redirect()->back();
+            }
+            else{
+                $user->password = Hash::make($request->password);
+            }
+        }
+
         $user->save();
+        if(isset($request->password) | isset($request->email)){
+            Auth::logout();
+        }
         toastr()->success("Credentials updated successfully!");
         return redirect()->back();
     }

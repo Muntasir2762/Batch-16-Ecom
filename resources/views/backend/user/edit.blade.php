@@ -8,12 +8,12 @@
             <!--begin::Row-->
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="mb-0">Update Credentials</h3>
+                    <h3 class="mb-0">Edit User</h3>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-end">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Update Credentials</li>
+                        <li class="breadcrumb-item active" aria-current="page">Edit User</li>
                     </ol>
                 </div>
             </div>
@@ -34,11 +34,11 @@
                     <div class="card card-primary card-outline mb-4">
                         <!--begin::Header-->
                         <div class="card-header">
-                            <div class="card-title">Input Credentials</div>
+                            <div class="card-title">Edit User</div>
                         </div>
                         <!--end::Header-->
                         <!--begin::Form-->
-                        <form action="{{url('/admin/update-credentials')}}" method="POST" enctype="multipart/form-data">
+                        <form action="{{url('/admin/user/update/'.$user->id)}}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <!--begin::Body-->
                             <div class="card-body">
@@ -46,33 +46,33 @@
                                     <label for="name" class="form-label">User Name*</label>
                                     <input type="text" class="form-control" value="{{$user->name}}" name="name" id="name" required/>
                                 </div>
+
                                 <div class="mb-3">
-                                    <label for="email" class="form-label">Email*</label>
-                                    <input type="email" class="form-control" name="email" value="{{$user->email}}" id="email" required/>
+                                    <label for="role" class="form-label">Select Role*</label>
+                                    <select class="form-control" name="role" id="role">
+                                        <option value="employee" @if ($user->role == "employee")
+                                            selected
+                                        @endif>Employee</option>
+                                        <option value="editor" @if ($user->role == "editor")
+                                            selected
+                                        @endif>Editor</option>
+                                    </select>
                                 </div>
+
                                 <div class="mb-3">
-                                    <label for="old_password" class="form-label">Old Password*</label>
-                                    <input type="password" class="form-control" name="old_password" value="" id="old_password"/>
+                                    <label for="email" class="form-label">User Email*</label>
+                                    <input type="email" class="form-control" value="{{$user->email}}" name="email" id="email" required/>
                                 </div>
+
                                 <div class="mb-3">
-                                    <label for="password" class="form-label">New Password*</label>
-                                    <input type="password" class="form-control" name="password" value="" id="password"/>
-                                    @error('password')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                <div class="mb-3">
-                                    <label for="password_confirmation" class="form-label">Confirm New Password*</label>
-                                    <input type="password" class="form-control" name="password_confirmation" value="" id="confirm_password"/>
-                                    @error('password_confirmation')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
+                                    <label for="password" class="form-label">User Password*</label>
+                                    <input type="text" class="form-control" name="password" id="password"/>
                                 </div>
                             </div>
                             <!--end::Body-->
                             <!--begin::Footer-->
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Update</button>
+                                <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
                             <!--end::Footer-->
                         </form>
